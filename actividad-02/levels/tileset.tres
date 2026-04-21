@@ -1,0 +1,32 @@
+[gd_resource type="TileSet" format=3 uid="uid://cn00qbj1mkif"]
+
+[ext_resource type="Texture2D" uid="uid://bq7l033r6f680" path="res://levels/obstacle.png" id="1"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0vtpw"]
+texture = ExtResource("1")
+0:0/next_alternative_id = 8
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8, -8, 8, -8, 8, -8, 8, -8, 8)
+0:0/1 = 1
+0:0/1/flip_h = true
+0:0/2 = 2
+0:0/2/flip_v = true
+0:0/3 = 3
+0:0/3/flip_h = true
+0:0/3/flip_v = true
+0:0/4 = 4
+0:0/4/transpose = true
+0:0/5 = 5
+0:0/5/flip_h = true
+0:0/5/transpose = true
+0:0/6 = 6
+0:0/6/flip_v = true
+0:0/6/transpose = true
+0:0/7 = 7
+0:0/7/flip_h = true
+0:0/7/flip_v = true
+0:0/7/transpose = true
+
+[resource]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_0vtpw")
