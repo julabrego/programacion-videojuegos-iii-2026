@@ -11,7 +11,12 @@ func _ready():
 
 func _physics_process(delta):
 	angle += speed * delta
+	var target_position = center_position + Vector2(cos(angle), sin(angle)) * radius
 	
-	var offset = Vector2(cos(angle), sin(angle)) * radius
-	
-	position = center_position + offset
+	var motion = target_position - position
+	move_and_collide(motion)
+
+	position = target_position
+
+func get_damage():
+	queue_free()
