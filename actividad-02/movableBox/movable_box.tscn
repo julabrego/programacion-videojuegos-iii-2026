@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://bdr541cuefwrw"]
+
+[ext_resource type="Texture2D" uid="uid://xlgnal526opc" path="res://player/player.png" id="1_4wyg6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7mycd"]
+size = Vector2(16, 16)
+
+[node name="MovableBox" type="RigidBody2D" unique_id=470729902 groups=["hits_bullet", "pushable"]]
+collision_layer = 16
+collision_mask = 13
+mass = 10.0
+gravity_scale = 0.0
+linear_damp = 4.0
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1574823675]
+modulate = Color(1, 0.6313726, 0, 1)
+texture = ExtResource("1_4wyg6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=71135826]
+shape = SubResource("RectangleShape2D_7mycd")

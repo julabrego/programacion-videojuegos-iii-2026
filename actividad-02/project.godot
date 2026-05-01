@@ -23,6 +23,14 @@ config/icon="res://icon.png"
 
 window/stretch/mode="2d"
 
+[global_group]
+
+player_bullet=""
+player=""
+pushable=""
+hits_bullet=""
+terrain=""
+
 [importer_defaults]
 
 texture={

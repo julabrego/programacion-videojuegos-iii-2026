@@ -4,10 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://d4mmfsjite1gy" path="res://player/player.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://kr0vvro210me" path="res://enemy/enemy.tscn" id="2_h2yge"]
 [ext_resource type="PackedScene" uid="uid://dywkf7do3ovq4" path="res://movingObstacle/moving_obstacle.tscn" id="3_1bvp3"]
-[ext_resource type="Texture2D" uid="uid://xlgnal526opc" path="res://player/player.png" id="5_lquwl"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7mycd"]
-size = Vector2(16, 16)
+[ext_resource type="PackedScene" uid="uid://bdr541cuefwrw" path="res://movableBox/movable_box.tscn" id="5_lquwl"]
 
 [node name="game" type="Node2D" unique_id=1975436416]
 
@@ -35,12 +32,42 @@ position = Vector2(256, 336)
 position = Vector2(976, 480)
 speed = 4.0
 
-[node name="MovingObstacle" parent="level1" unique_id=898294258 instance=ExtResource("3_1bvp3")]
+[node name="MovingObstacle" parent="level1" unique_id=898294258 groups=["hits_bullet"] instance=ExtResource("3_1bvp3")]
 position = Vector2(328, 328)
 orientation = 1
 
-[node name="MovingObstacle2" parent="level1" unique_id=1779791183 instance=ExtResource("3_1bvp3")]
+[node name="MovingObstacle2" parent="level1" unique_id=1779791183 groups=["hits_bullet"] instance=ExtResource("3_1bvp3")]
 position = Vector2(616, 264)
+
+[node name="MovableBox" parent="level1" unique_id=470729902 instance=ExtResource("5_lquwl")]
+position = Vector2(392, 392)
+
+[node name="MovableBox2" parent="level1" unique_id=1287791728 instance=ExtResource("5_lquwl")]
+position = Vector2(392, 376)
+
+[node name="MovableBox3" parent="level1" unique_id=2044959498 instance=ExtResource("5_lquwl")]
+position = Vector2(392, 360)
+
+[node name="MovableBox4" parent="level1" unique_id=2099229716 instance=ExtResource("5_lquwl")]
+position = Vector2(392, 344)
+
+[node name="MovableBox5" parent="level1" unique_id=2008250230 instance=ExtResource("5_lquwl")]
+position = Vector2(392, 328)
+
+[node name="MovableBox6" parent="level1" unique_id=1374331648 instance=ExtResource("5_lquwl")]
+position = Vector2(856, 520)
+
+[node name="MovableBox7" parent="level1" unique_id=1329142441 instance=ExtResource("5_lquwl")]
+position = Vector2(856, 504)
+
+[node name="MovableBox8" parent="level1" unique_id=1004527232 instance=ExtResource("5_lquwl")]
+position = Vector2(856, 488)
+
+[node name="MovableBox9" parent="level1" unique_id=1839384469 instance=ExtResource("5_lquwl")]
+position = Vector2(856, 472)
+
+[node name="MovableBox10" parent="level1" unique_id=80911123 instance=ExtResource("5_lquwl")]
+position = Vector2(856, 456)
 
 [node name="player" parent="." unique_id=1414850156 instance=ExtResource("2")]
 position = Vector2(120, 168)
@@ -48,19 +75,3 @@ collision_mask = 25
 metadata/_edit_group_ = true
 
 [node name="Camera2D" type="Camera2D" parent="player" unique_id=348831053]
-
-[node name="MovingBox" type="RigidBody2D" parent="." unique_id=700977264 groups=["pushable"]]
-position = Vector2(184, 216)
-collision_layer = 16
-collision_mask = 9
-mass = 10.0
-gravity_scale = 0.0
-linear_damp = 4.0
-metadata/_edit_group_ = true
-
-[node name="Sprite2D" type="Sprite2D" parent="MovingBox" unique_id=1684549587]
-modulate = Color(1, 0.6313726, 0, 1)
-texture = ExtResource("5_lquwl")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MovingBox" unique_id=1675405241]
-shape = SubResource("RectangleShape2D_7mycd")

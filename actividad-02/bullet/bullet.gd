@@ -22,4 +22,5 @@ func apply_damage_if_corresponds(collider: Object):
 
 func destroy_if_corresponds(collider: Object):
 	if collider.is_in_group("hits_bullet"):
+		print("pumba")
 		queue_free()
