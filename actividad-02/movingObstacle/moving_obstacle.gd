@@ -22,7 +22,7 @@ func _ready() -> void:
 		move_direction = Vector2.RIGHT
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if $Timer.is_stopped() and not is_moving:
 		is_moving = true
 	

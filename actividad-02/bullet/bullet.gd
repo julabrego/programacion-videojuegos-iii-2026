@@ -17,10 +17,9 @@ func _physics_process(delta: float) -> void:
 	position = target_position
 
 func apply_damage_if_corresponds(collider: Object):
-	if(collider.has_method("get_damage")):
-		collider.get_damage()
+	if(collider.has_method("get_hurt")):
+		collider.get_hurt()
 
 func destroy_if_corresponds(collider: Object):
 	if collider.is_in_group("hits_bullet"):
-		print("pumba")
 		queue_free()

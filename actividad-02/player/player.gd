@@ -8,6 +8,17 @@ extends CharacterBody2D
 var push_velocity
 var facing_direction: Vector2 = Vector2(1.0, 0.0)
 
+func _ready():
+	EventManager.won_game.connect(disable_processing)
+
+func get_hurt():
+	visible = false
+	process_mode = Node.PROCESS_MODE_DISABLED
+	EventManager.lost_game.emit()
+	
+func disable_processing():
+	process_mode = Node.PROCESS_MODE_DISABLED
+	
 func _physics_process(delta):
 	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_bottom")
 	
