@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://dywkf7do3ovq4"]
+
+[ext_resource type="Texture2D" uid="uid://bq7l033r6f680" path="res://levels/obstacle.png" id="1_if47a"]
+[ext_resource type="Script" uid="uid://bpdh676fbtix2" path="res://movingObstacle/moving_obstacle.gd" id="1_orkgy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lquwl"]
+size = Vector2(16, 16)
+
+[node name="MovingObstacle" type="CharacterBody2D" unique_id=1779791183]
+collision_mask = 9
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_orkgy")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1826735873]
+texture = ExtResource("1_if47a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=307233588]
+shape = SubResource("RectangleShape2D_lquwl")
+
+[node name="Timer" type="Timer" parent="." unique_id=958107745]
+one_shot = true
+autostart = true
