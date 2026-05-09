@@ -24,19 +24,19 @@ func _ready():
 
 func _physics_process(delta):
 	match current_movement:
-		0:
-			handle_follow_mouse_movement()
-		1:
-			handle_tap_movement()
+		0, 1:
+			handle_target_follow_movement()
 		2:
 			pass
 		3:
 			pass
 	
 func _unhandled_input(event: InputEvent) -> void:
-	if current_movement == 1 and event is InputEventMouseButton and event.is_pressed():
-		target_position = get_global_mouse_position()
-		is_moving = true
+	if event is InputEventMouse:
+		if current_movement == 0:
+			target_position = get_global_mouse_position()
+		elif current_movement == 1 and event is InputEventMouseButton and event.is_pressed():
+			target_position = get_global_mouse_position()
 	
 func hurt(amount):
 	health = clamp(health-amount, 0 , 100)
@@ -58,21 +58,11 @@ func handle_action_polling_movement(delta):
 	velocity = motion.normalized()*SPEED
 	move_and_slide()
 
-func handle_follow_mouse_movement():
-	var mouse_position = get_global_mouse_position()
-	var distance = mouse_position.distance_to(position)
-	
-	if distance > 5:
-		var direction = (mouse_position - position).normalized()
-		velocity = (direction * SPEED)
-		move_and_slide()
-	else:
-		is_moving = false
-		
-func handle_tap_movement():
+func handle_target_follow_movement():
 	var distance = target_position.distance_to(position)
 	
 	if distance > 5:
+		is_moving = true
 		var direction = (target_position - position).normalized()
 		velocity = (direction * SPEED)
 		move_and_slide()
