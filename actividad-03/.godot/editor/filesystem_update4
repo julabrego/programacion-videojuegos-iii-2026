@@ -3,3 +3,4 @@ res://levels/tileset.tres
 res://HUD/hud.gd
 res://input/follow_mouse.gd
 res://player/player.gd
+res://obstacles/damagezone.gd

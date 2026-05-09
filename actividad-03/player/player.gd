@@ -16,6 +16,13 @@ var current_movement: int = 0
 # 2 = Teclado (polling)
 # 3 = Telcado (eventos)
 
+var keyboard_action_poll = {
+	up = false,
+	down = false,
+	left = false,
+	right = false
+}
+
 var target_position: Vector2 = position
 var is_moving: bool = false
 
@@ -29,7 +36,7 @@ func _physics_process(delta):
 		2:
 			handle_keyboard_polling_movement(delta)
 		3:
-			pass
+			apply_keyboard_movement(delta)
 	
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouse:
@@ -37,6 +44,11 @@ func _unhandled_input(event: InputEvent) -> void:
 			target_position = get_global_mouse_position()
 		elif current_movement == 1 and event is InputEventMouseButton and event.is_pressed():
 			target_position = get_global_mouse_position()
+	elif event is InputEventKey and current_movement == 3:
+		if event.is_pressed() or event.is_released():
+			var key = event.as_text_keycode().to_lower()
+			if ["up", "down", "left", "right"].has(key):
+				keyboard_action_poll.set(key, event.is_pressed())
 	
 func hurt(amount):
 	health = clamp(health-amount, 0 , 100)
@@ -52,27 +64,26 @@ func hurt(amount):
 	
 	emit_signal("health_change",health)
 
-func handle_action_polling_movement(delta):
-	var motion = Input.get_vector("move_left","move_right","move_up","move_bottom")
-	
-	velocity = motion.normalized()*SPEED
-	move_and_slide()
-	
 func handle_keyboard_polling_movement(delta):
-	var is_moving_up = Input.is_key_label_pressed(KEY_UP)
-	var is_moving_down = Input.is_key_label_pressed(KEY_DOWN)
-	var is_moving_left = Input.is_key_label_pressed(KEY_LEFT)
-	var is_moving_right = Input.is_key_label_pressed(KEY_RIGHT)
+	keyboard_action_poll.assign({
+		up = Input.is_key_label_pressed(KEY_UP),
+		down = Input.is_key_label_pressed(KEY_DOWN),
+		left = Input.is_key_label_pressed(KEY_LEFT),
+		right = Input.is_key_label_pressed(KEY_RIGHT),
+	})
 	
+	apply_keyboard_movement(delta)
+	
+func apply_keyboard_movement(delta):
 	var motion = Vector2.ZERO
 	
-	motion.x = int(is_moving_right) - int(is_moving_left)
-	motion.y = int(is_moving_down) - int(is_moving_up)
+	motion.x = int(keyboard_action_poll.right) - int(keyboard_action_poll.left)
+	motion.y = int(keyboard_action_poll.down) - int(keyboard_action_poll.up)
 	
 	if motion.length() > 0:
 		motion = motion.normalized()
 	
-	var velocity = motion * SPEED * delta
+	velocity = motion * SPEED * delta
 	move_and_collide(velocity)
 
 func handle_target_follow_movement():

@@ -15,4 +15,3 @@ func _on_zone_body_enter( body ):
 
 func _on_zone_body_exit( body ):
 	trapped_body = null
-
