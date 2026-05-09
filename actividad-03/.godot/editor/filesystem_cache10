@@ -1,0 +1,15 @@
+63f7b34db8d8cdea90c76aacccf841ec
+::res://::1778358124
+icon.png::CompressedTexture2D::9039516367968031553::1529550788::1778358125::1::::<><><>0<>0<>da3c03250310a7fef120fd18cb66bca9<>res://.godot/imported/icon.png-487276ed1e3a0c39cad0279d744ee560.ctex::
+main.tscn::PackedScene::6885699974602865354::1748212490::0::1::::<><><>0<>0<><>::uid://ee7hwyj1bdpi::::res://levels/tileset.tres<>uid://c672fvoshbj8e::::res://obstacles/damagezone.gd<>uid://dl20c6v8jnswi::::res://player/player.tscn<>uid://crbtm0vvi4j4::::res://HUD/hud.gd<>uid://cdu21gbfjfyxc::::res://levels/obstacle.png
+::res://HUD/::1778357957
+hud.gd::GDScript::175567426054907827::1717126063::0::1::::<>Control<><>0<>0<><>::
+::res://levels/::1778357957
+obstacle.png::CompressedTexture2D::5026381559752051080::1529550788::1778358125::1::::<><><>0<>0<>aad905cb6315d6252cd5210cc414e44b<>res://.godot/imported/obstacle.png-d859e7d4af8b1d87225424d0dbe1a57f.ctex::
+tileset.tres::TileSet::290969522926945754::1748212490::0::1::::<><><>0<>0<><>::uid://cdu21gbfjfyxc::::res://levels/obstacle.png
+::res://obstacles/::1778357957
+damagezone.gd::GDScript::7016405021514195522::1717126063::0::1::::<>Area2D<><>0<>0<><>::
+::res://player/::1778357957
+player.gd::GDScript::3733320655660519706::1717126674::0::1::::<>CharacterBody2D<><>0<>0<><>::
+player.png::CompressedTexture2D::5143517281434901815::1529550788::1778358125::1::::<><><>0<>0<>80a6873830efd46da7a0d06e9d4561ed<>res://.godot/imported/player.png-1ad27fc2a62fa126eae918723933dd6f.ctex::
+player.tscn::PackedScene::7988600689040920468::1748212485::0::1::::<><><>0<>0<><>::uid://btgpimddubsoo::::res://player/player.gd<>uid://cfjs8i0ek8yot::::res://player/player.png

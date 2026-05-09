@@ -13,14 +13,9 @@ signal im_dead
 func _ready():
 	emit_signal("health_change",health)
 
-
 func _physics_process(delta):
-	var motion = Input.get_vector("move_left","move_right","move_up","move_bottom")
+	handle_follow_mouse_movement(delta)
 	
-	velocity = motion.normalized()*SPEED
-	
-	move_and_slide()
-
 func hurt(amount):
 	health = clamp(health-amount, 0 , 100)
 	
@@ -35,3 +30,17 @@ func hurt(amount):
 	
 	emit_signal("health_change",health)
 
+func handle_action_polling_movement(delta):
+	var motion = Input.get_vector("move_left","move_right","move_up","move_bottom")
+	
+	velocity = motion.normalized()*SPEED
+	move_and_slide()
+
+func handle_follow_mouse_movement(delta):
+	var mouse_position = get_global_mouse_position()
+	var distance = mouse_position.distance_to(position)
+	
+	if distance > 5:
+		var direction = (mouse_position - position).normalized()
+		velocity = (direction * SPEED)
+		move_and_slide()
