@@ -11,7 +11,9 @@ signal health_change
 signal im_dead
 
 var MOUSE_DISTANCE_TRESHOLD = 5
-var current_movement: int = 0 # 0 = Mouse | 1 = Tap | 2 = Teclado (polling) | 3 = Telcado (eventos)
+
+# 0 = Mouse | 1 = Tap | 2 = Teclado (polling) | 3 = Telcado (eventos) | 4 = Joypad (MapInput)
+var current_movement: int = 0 
 
 var keyboard_action_poll = {
 	up = false,
@@ -31,10 +33,12 @@ func _physics_process(delta):
 		0, 1:
 			apply_move_to_target()
 		2:
-			handle_keyboard_polling_movement(delta)
+			handle_keyboard_polling_based_status(delta)
 			apply_keyboard_movement(delta)
 		3:
 			apply_keyboard_movement(delta)
+		4: 
+			handle_gamepad_movement()
 	
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouse:
@@ -60,7 +64,7 @@ func hurt(amount):
 	
 	emit_signal("health_change",health)
 
-func handle_keyboard_polling_movement(delta):
+func handle_keyboard_polling_based_status(delta):
 	keyboard_action_poll.assign({
 		up = Input.is_key_label_pressed(KEY_UP),
 		down = Input.is_key_label_pressed(KEY_DOWN),
@@ -101,6 +105,15 @@ func apply_move_to_target():
 	else:
 		is_moving = false
 
+func handle_gamepad_movement():
+	var motion_x = Input.get_axis("move_left", "move_right")
+	var motion_y = Input.get_axis("move_up", "move_bottom")
+	
+	velocity.x = motion_x * SPEED
+	velocity.y = motion_y * SPEED
+	
+	move_and_slide()
+	
 func _on_option_button_item_selected(index: int) -> void:
 	target_position = position
 	is_moving = false

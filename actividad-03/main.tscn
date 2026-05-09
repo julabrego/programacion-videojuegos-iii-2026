@@ -80,7 +80,7 @@ text = "0000"
 [node name="OptionButton" type="OptionButton" parent="CanvasLayer/HUD/VBoxContainer" unique_id=1027288979]
 layout_mode = 2
 selected = 0
-item_count = 4
+item_count = 5
 popup/item_0/text = "Mouse"
 popup/item_0/id = 0
 popup/item_1/text = "Tap"
@@ -89,6 +89,8 @@ popup/item_2/text = "Teclado (polling)"
 popup/item_2/id = 2
 popup/item_3/text = "Teclado (eventos)"
 popup/item_3/id = 3
+popup/item_4/text = "Joypad"
+popup/item_4/id = 4
 
 [node name="background" type="Sprite2D" parent="." unique_id=1277420363]
 modulate = Color(0.135498, 0.289062, 0.238674, 1)
