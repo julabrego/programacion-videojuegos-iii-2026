@@ -27,7 +27,7 @@ func _physics_process(delta):
 		0, 1:
 			handle_target_follow_movement()
 		2:
-			pass
+			handle_keyboard_polling_movement(delta)
 		3:
 			pass
 	
@@ -57,6 +57,23 @@ func handle_action_polling_movement(delta):
 	
 	velocity = motion.normalized()*SPEED
 	move_and_slide()
+	
+func handle_keyboard_polling_movement(delta):
+	var is_moving_up = Input.is_key_label_pressed(KEY_UP)
+	var is_moving_down = Input.is_key_label_pressed(KEY_DOWN)
+	var is_moving_left = Input.is_key_label_pressed(KEY_LEFT)
+	var is_moving_right = Input.is_key_label_pressed(KEY_RIGHT)
+	
+	var motion = Vector2.ZERO
+	
+	motion.x = int(is_moving_right) - int(is_moving_left)
+	motion.y = int(is_moving_down) - int(is_moving_up)
+	
+	if motion.length() > 0:
+		motion = motion.normalized()
+	
+	var velocity = motion * SPEED * delta
+	move_and_collide(velocity)
 
 func handle_target_follow_movement():
 	var distance = target_position.distance_to(position)
