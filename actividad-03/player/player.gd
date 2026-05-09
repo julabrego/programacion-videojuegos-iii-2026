@@ -10,11 +10,8 @@ var dead = false
 signal health_change
 signal im_dead
 
-var current_movement: int = 0
-# 0 = Mouse
-# 1 = Tap
-# 2 = Teclado (polling)
-# 3 = Telcado (eventos)
+var MOUSE_DISTANCE_TRESHOLD = 5
+var current_movement: int = 0 # 0 = Mouse | 1 = Tap | 2 = Teclado (polling) | 3 = Telcado (eventos)
 
 var keyboard_action_poll = {
 	up = false,
@@ -25,16 +22,17 @@ var keyboard_action_poll = {
 
 var target_position: Vector2 = position
 var is_moving: bool = false
-
+	
 func _ready():
 	emit_signal("health_change",health)
 
 func _physics_process(delta):
 	match current_movement:
 		0, 1:
-			handle_target_follow_movement()
+			apply_move_to_target()
 		2:
 			handle_keyboard_polling_movement(delta)
+			apply_keyboard_movement(delta)
 		3:
 			apply_keyboard_movement(delta)
 	
@@ -46,10 +44,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			target_position = get_global_mouse_position()
 	elif event is InputEventKey and current_movement == 3:
 		if event.is_pressed() or event.is_released():
-			var key = event.as_text_keycode().to_lower()
-			if ["up", "down", "left", "right"].has(key):
-				keyboard_action_poll.set(key, event.is_pressed())
-	
+			handle_keyboard_event_based_status(event)
+
 func hurt(amount):
 	health = clamp(health-amount, 0 , 100)
 	
@@ -72,7 +68,15 @@ func handle_keyboard_polling_movement(delta):
 		right = Input.is_key_label_pressed(KEY_RIGHT),
 	})
 	
-	apply_keyboard_movement(delta)
+func handle_keyboard_event_based_status(event: InputEventKey):
+	if event.keycode == KEY_UP:
+		keyboard_action_poll.set("up", event.is_pressed())
+	if event.keycode == KEY_DOWN:
+		keyboard_action_poll.set("down", event.is_pressed())
+	if event.keycode == KEY_LEFT:
+		keyboard_action_poll.set("left", event.is_pressed())
+	if event.keycode == KEY_RIGHT:
+		keyboard_action_poll.set("right", event.is_pressed())
 	
 func apply_keyboard_movement(delta):
 	var motion = Vector2.ZERO
@@ -86,10 +90,10 @@ func apply_keyboard_movement(delta):
 	velocity = motion * SPEED * delta
 	move_and_collide(velocity)
 
-func handle_target_follow_movement():
+func apply_move_to_target():
 	var distance = target_position.distance_to(position)
 	
-	if distance > 5:
+	if distance > MOUSE_DISTANCE_TRESHOLD:
 		is_moving = true
 		var direction = (target_position - position).normalized()
 		velocity = (direction * SPEED)
