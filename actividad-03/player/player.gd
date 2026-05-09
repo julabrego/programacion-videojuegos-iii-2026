@@ -10,11 +10,25 @@ var dead = false
 signal health_change
 signal im_dead
 
+var current_movement: int = 0
+# 0 = Mouse
+# 1 = Tap
+# 2 = Teclado (polling)
+# 3 = Telcado (eventos)
+
 func _ready():
 	emit_signal("health_change",health)
 
 func _physics_process(delta):
-	handle_follow_mouse_movement(delta)
+	match current_movement:
+		0:
+			handle_follow_mouse_movement(delta)
+		1:
+			pass
+		2:
+			pass
+		3:
+			pass
 	
 func hurt(amount):
 	health = clamp(health-amount, 0 , 100)
@@ -44,3 +58,6 @@ func handle_follow_mouse_movement(delta):
 		var direction = (mouse_position - position).normalized()
 		velocity = (direction * SPEED)
 		move_and_slide()
+
+func _on_option_button_item_selected(index: int) -> void:
+	current_movement = index

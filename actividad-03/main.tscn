@@ -106,3 +106,4 @@ region_filter_clip_enabled = true
 [connection signal="body_exited" from="level1/obstacles/healZone" to="level1/obstacles/healZone" method="_on_zone_body_exit"]
 [connection signal="health_change" from="player" to="CanvasLayer/HUD" method="_on_health_change"]
 [connection signal="im_dead" from="player" to="CanvasLayer/HUD" method="_on_player_im_dead"]
+[connection signal="item_selected" from="CanvasLayer/HUD/VBoxContainer/OptionButton" to="player" method="_on_option_button_item_selected"]
