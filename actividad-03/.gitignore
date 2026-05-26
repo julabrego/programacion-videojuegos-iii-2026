@@ -1,4 +1,4 @@
-reated by https://www.toptal.com/developers/gitignore/api/godot
+# Created by https://www.toptal.com/developers/gitignore/api/godot
 # Edit at https://www.toptal.com/developers/gitignore?templates=godot
 
 ### Godot ###
@@ -19,5 +19,3 @@ data_*/
 mono_crash.*.json
 
 # End of https://www.toptal.com/developers/gitignore/api/godot
-
-*.tmp
