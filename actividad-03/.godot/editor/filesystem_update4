@@ -1,8 +1,0 @@
-res://main.tscn
-res://levels/tileset.tres
-res://movements/FollowMouseMovement.gd
-res://movements/TapMovement.gd
-res://player/player.gd
-res://movements/KeyboardPollingMovement.gd
-res://movements/KeyboardEventMovement.gd
-res://movements/JoypadMovement.gd
