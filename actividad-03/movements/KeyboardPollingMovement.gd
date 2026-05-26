@@ -1,6 +1,6 @@
 extends Node
 
-var target_node: CharacterBody2D
+var target_node: Node
 @export var SPEED: float = 160
 
 var keyboard_action_poll = {
@@ -12,6 +12,8 @@ var keyboard_action_poll = {
 
 func _ready() -> void:
 	target_node = get_parent()
+	while target_node and not target_node is CharacterBody2D:
+			target_node = target_node.get_parent()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:

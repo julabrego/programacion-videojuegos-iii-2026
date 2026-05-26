@@ -1,6 +1,6 @@
 extends Node
 
-var target_node: CharacterBody2D
+var target_node: Node
 @export var SPEED: float = 160
 @export var MOUSE_DISTANCE_TRESHOLD = 5
 
@@ -13,6 +13,9 @@ func _physics_process(delta: float) -> void:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	target_node = get_parent()
+	while target_node and not target_node is CharacterBody2D:
+			target_node = target_node.get_parent()
+
 	target_position = target_node.position
 	
 func _unhandled_input(event: InputEvent) -> void:

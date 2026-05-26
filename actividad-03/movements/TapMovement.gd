@@ -1,6 +1,6 @@
 extends Node
 
-var target_node: CharacterBody2D
+var target_node: Node
 @export var SPEED: float = 160
 @export var MOUSE_DISTANCE_TRESHOLD = 5
 
@@ -10,6 +10,8 @@ var is_moving: bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	target_node = get_parent()
+	while target_node and not target_node is CharacterBody2D:
+			target_node = target_node.get_parent()
 	activate()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

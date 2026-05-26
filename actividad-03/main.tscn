@@ -55,19 +55,22 @@ position = Vector2(108.528, 242.682)
 SPEED = 160.0
 MAX_HEALTH = 100.0
 
-[node name="FollowMouseMovement" type="Node2D" parent="player" unique_id=1687744308]
+[node name="Movements" type="Node2D" parent="player" unique_id=508319195]
+
+[node name="FollowMouseMovement" type="Node2D" parent="player/Movements" unique_id=1687744308]
 script = ExtResource("4_7mycd")
 
-[node name="TapMovement" type="Node2D" parent="player" unique_id=1211950812]
+[node name="TapMovement" type="Node2D" parent="player/Movements" unique_id=1211950812]
 script = ExtResource("5_4c57u")
 
-[node name="KeyboardPollingMovement" type="Node2D" parent="player" unique_id=2069409804]
+[node name="KeyboardPollingMovement" type="Node2D" parent="player/Movements" unique_id=2069409804]
 script = ExtResource("6_efxa6")
 
-[node name="KeyboardEventMovement" type="Node2D" parent="player" unique_id=229262235]
+[node name="KeyboardEventMovement" type="Node2D" parent="player/Movements" unique_id=229262235]
 script = ExtResource("7_dg77c")
+SPEED = null
 
-[node name="JoypadMovement" type="Node2D" parent="player" unique_id=991590983]
+[node name="JoypadMovement" type="Node2D" parent="player/Movements" unique_id=991590983]
 script = ExtResource("8_ycdy4")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1674294553]
