@@ -1,6 +1,8 @@
 res://main.tscn
 res://levels/tileset.tres
-res://HUD/hud.gd
-res://input/follow_mouse.gd
+res://movements/FollowMouseMovement.gd
+res://movements/TapMovement.gd
 res://player/player.gd
-res://obstacles/damagezone.gd
+res://movements/KeyboardPollingMovement.gd
+res://movements/KeyboardEventMovement.gd
+res://movements/JoypadMovement.gd

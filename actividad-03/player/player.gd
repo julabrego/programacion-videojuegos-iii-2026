@@ -15,40 +15,12 @@ var MOUSE_DISTANCE_TRESHOLD = 5
 # 0 = Mouse | 1 = Tap | 2 = Teclado (polling) | 3 = Telcado (eventos) | 4 = Joypad (MapInput)
 var current_movement: int = 0 
 
-var keyboard_action_poll = {
-	up = false,
-	down = false,
-	left = false,
-	right = false
-}
-
 var target_position: Vector2 = position
 var is_moving: bool = false
 	
 func _ready():
 	emit_signal("health_change",health)
-
-func _physics_process(delta):
-	match current_movement:
-		0, 1:
-			apply_move_to_target()
-		2:
-			handle_keyboard_polling_based_status(delta)
-			apply_keyboard_movement(delta)
-		3:
-			apply_keyboard_movement(delta)
-		4: 
-			handle_gamepad_movement()
-	
-func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouse:
-		if current_movement == 0:
-			target_position = get_global_mouse_position()
-		elif current_movement == 1 and event is InputEventMouseButton and event.is_pressed():
-			target_position = get_global_mouse_position()
-	elif event is InputEventKey and current_movement == 3:
-		if event.is_pressed() or event.is_released():
-			handle_keyboard_event_based_status(event)
+	toggle_current_movement(current_movement)
 
 func hurt(amount):
 	health = clamp(health-amount, 0 , 100)
@@ -64,57 +36,41 @@ func hurt(amount):
 	
 	emit_signal("health_change",health)
 
-func handle_keyboard_polling_based_status(delta):
-	keyboard_action_poll.assign({
-		up = Input.is_key_label_pressed(KEY_UP),
-		down = Input.is_key_label_pressed(KEY_DOWN),
-		left = Input.is_key_label_pressed(KEY_LEFT),
-		right = Input.is_key_label_pressed(KEY_RIGHT),
-	})
-	
-func handle_keyboard_event_based_status(event: InputEventKey):
-	if event.keycode == KEY_UP:
-		keyboard_action_poll.set("up", event.is_pressed())
-	if event.keycode == KEY_DOWN:
-		keyboard_action_poll.set("down", event.is_pressed())
-	if event.keycode == KEY_LEFT:
-		keyboard_action_poll.set("left", event.is_pressed())
-	if event.keycode == KEY_RIGHT:
-		keyboard_action_poll.set("right", event.is_pressed())
-	
-func apply_keyboard_movement(delta):
-	var motion = Vector2.ZERO
-	
-	motion.x = int(keyboard_action_poll.right) - int(keyboard_action_poll.left)
-	motion.y = int(keyboard_action_poll.down) - int(keyboard_action_poll.up)
-	
-	if motion.length() > 0:
-		motion = motion.normalized()
-	
-	velocity = motion * SPEED * delta
-	move_and_collide(velocity)
-
-func apply_move_to_target():
-	var distance = target_position.distance_to(position)
-	
-	if distance > MOUSE_DISTANCE_TRESHOLD:
-		is_moving = true
-		var direction = (target_position - position).normalized()
-		velocity = (direction * SPEED)
-		move_and_slide()
-	else:
-		is_moving = false
-
-func handle_gamepad_movement():
-	var motion_x = Input.get_axis("move_left", "move_right")
-	var motion_y = Input.get_axis("move_up", "move_bottom")
-	
-	velocity.x = motion_x * SPEED
-	velocity.y = motion_y * SPEED
-	
-	move_and_slide()
+func toggle_current_movement(index: int) -> void:
+	match index:
+		0:
+			$FollowMouseMovement.process_mode = Node.PROCESS_MODE_ALWAYS
+			$TapMovement.process_mode = Node.PROCESS_MODE_DISABLED
+			$KeyboardPollingMovement.process_mode = Node.PROCESS_MODE_DISABLED
+			$KeyboardEventMovement.process_mode = Node.PROCESS_MODE_DISABLED
+			$JoypadMovement.process_mode = Node.PROCESS_MODE_DISABLED
+		1:
+			$FollowMouseMovement.process_mode = Node.PROCESS_MODE_DISABLED
+			$TapMovement.process_mode = Node.PROCESS_MODE_ALWAYS
+			$TapMovement.activate()
+			$KeyboardPollingMovement.process_mode = Node.PROCESS_MODE_DISABLED
+			$KeyboardEventMovement.process_mode = Node.PROCESS_MODE_DISABLED
+			$JoypadMovement.process_mode = Node.PROCESS_MODE_DISABLED
+		2:
+			$FollowMouseMovement.process_mode = Node.PROCESS_MODE_DISABLED
+			$TapMovement.process_mode = Node.PROCESS_MODE_DISABLED
+			$KeyboardPollingMovement.process_mode = Node.PROCESS_MODE_ALWAYS
+			$KeyboardEventMovement.process_mode = Node.PROCESS_MODE_DISABLED
+			$JoypadMovement.process_mode = Node.PROCESS_MODE_DISABLED
+		3:
+			$FollowMouseMovement.process_mode = Node.PROCESS_MODE_DISABLED
+			$TapMovement.process_mode = Node.PROCESS_MODE_DISABLED
+			$KeyboardPollingMovement.process_mode = Node.PROCESS_MODE_DISABLED
+			$KeyboardEventMovement.process_mode = Node.PROCESS_MODE_ALWAYS
+			$JoypadMovement.process_mode = Node.PROCESS_MODE_DISABLED
+		4:
+			$FollowMouseMovement.process_mode = Node.PROCESS_MODE_DISABLED
+			$TapMovement.process_mode = Node.PROCESS_MODE_DISABLED
+			$KeyboardPollingMovement.process_mode = Node.PROCESS_MODE_DISABLED
+			$KeyboardEventMovement.process_mode = Node.PROCESS_MODE_DISABLED
+			$JoypadMovement.process_mode = Node.PROCESS_MODE_ALWAYS
 	
 func _on_option_button_item_selected(index: int) -> void:
-	target_position = position
-	is_moving = false
 	current_movement = index
+	toggle_current_movement(current_movement)
+	
