@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://c30h4thsn3d6"]
+
+[ext_resource type="Texture2D" uid="uid://ciitt02cfx050" path="res://assets/textures/8bitmegaman.png" id="1_mr7gh"]
+
+[node name="Main" type="Node2D" unique_id=193599174]
+
+[node name="Megaman" type="Sprite2D" parent="." unique_id=1393372477]
+texture_filter = 1
+position = Vector2(160, 104)
+scale = Vector2(4, 4)
+texture = ExtResource("1_mr7gh")
+region_enabled = true
+region_rect = Rect2(103, 10, 21, 24)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1804565754]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer" unique_id=562654496]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -47.574997
+offset_bottom = -16.574997
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="Button" type="Button" parent="CanvasLayer/HBoxContainer" unique_id=230069962]
+layout_mode = 2
+text = "Cambiar color
+"
