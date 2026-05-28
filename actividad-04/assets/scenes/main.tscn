@@ -1,11 +1,16 @@
 [gd_scene format=3 uid="uid://c30h4thsn3d6"]
 
+[ext_resource type="Shader" uid="uid://d2pe0sai01ck7" path="res://assets/shaders/megaman_colors.tres" id="1_kpi06"]
 [ext_resource type="Texture2D" uid="uid://ciitt02cfx050" path="res://assets/textures/8bitmegaman.png" id="1_mr7gh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dfgan"]
+shader = ExtResource("1_kpi06")
 
 [node name="Main" type="Node2D" unique_id=193599174]
 
 [node name="Megaman" type="Sprite2D" parent="." unique_id=1393372477]
 texture_filter = 1
+material = SubResource("ShaderMaterial_dfgan")
 position = Vector2(160, 104)
 scale = Vector2(4, 4)
 texture = ExtResource("1_mr7gh")
