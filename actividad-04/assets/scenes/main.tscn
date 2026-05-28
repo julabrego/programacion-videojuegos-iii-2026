@@ -5,6 +5,8 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dfgan"]
 shader = ExtResource("1_kpi06")
+shader_parameter/MODIFIED_LIGHTBLUE = Color(1, 0, 0, 1)
+shader_parameter/MODIFIED_BLUE = Color(0, 0.702111, 0.986248, 1)
 
 [node name="Main" type="Node2D" unique_id=193599174]
 
