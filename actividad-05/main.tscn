@@ -2,10 +2,11 @@
 
 [ext_resource type="Texture2D" uid="uid://cnn600na8xmtv" path="res://frog_idle.png" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://codpm3p0522ka" path="res://scripts/GameManager.gd" id="1_lquwl"]
-[ext_resource type="Script" uid="uid://jwq06vw4u8il" path="res://scripts/Gameplay.gd" id="2_1bvp3"]
+[ext_resource type="Script" uid="uid://jwq06vw4u8il" path="res://scripts/FrogController.gd" id="2_1bvp3"]
 [ext_resource type="Script" uid="uid://dufnshh7x7nt3" path="res://scripts/UIManager.gd" id="2_7mycd"]
 [ext_resource type="AudioStream" uid="uid://dcposuytmlaxh" path="res://Frog.mp3" id="2_h2yge"]
 [ext_resource type="AudioStream" uid="uid://cbd4m8fyiykg7" path="res://the_comeback2.ogg" id="3_1bvp3"]
+[ext_resource type="Script" uid="uid://bh56xgj2h1rmt" path="res://scripts/AudioController.gd" id="5_272bh"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0xm2m"]
 outline_size = 12
@@ -175,11 +176,14 @@ text = "X: Y:"
 label_settings = SubResource("LabelSettings_0xm2m")
 horizontal_alignment = 1
 
-[node name="SFX" type="AudioStreamPlayer" parent="Game/FrogIdle" unique_id=1285233022]
+[node name="AudioController" type="Node2D" parent="Game" unique_id=1451816728]
+script = ExtResource("5_272bh")
+
+[node name="SFX" type="AudioStreamPlayer" parent="Game/AudioController" unique_id=1285233022]
 unique_name_in_owner = true
 stream = ExtResource("2_h2yge")
 
-[node name="BGM" type="AudioStreamPlayer" parent="Game" unique_id=1658435574]
+[node name="BGM" type="AudioStreamPlayer" parent="Game/AudioController" unique_id=1658435574]
 unique_name_in_owner = true
 stream = ExtResource("3_1bvp3")
 volume_db = -15.0
