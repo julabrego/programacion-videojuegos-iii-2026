@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://5yubdh3lysmk"]
 
 [ext_resource type="Texture2D" uid="uid://cnn600na8xmtv" path="res://frog_idle.png" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://jwq06vw4u8il" path="res://scripts/LevelManager.gd" id="2_1bvp3"]
 [ext_resource type="AudioStream" uid="uid://dcposuytmlaxh" path="res://Frog.mp3" id="2_h2yge"]
 [ext_resource type="AudioStream" uid="uid://cbd4m8fyiykg7" path="res://the_comeback2.ogg" id="3_1bvp3"]
 
@@ -152,6 +153,7 @@ layout_mode = 2
 text = "BGM"
 
 [node name="Game" type="Node2D" parent="." unique_id=1605636483]
+script = ExtResource("2_1bvp3")
 
 [node name="FrogIdle" type="Sprite2D" parent="Game" unique_id=1129009673]
 unique_name_in_owner = true
@@ -177,3 +179,5 @@ autoplay = true
 stream = ExtResource("3_1bvp3")
 volume_db = -15.0
 autoplay = true
+
+[connection signal="gui_input" from="HBoxContainer/GamePanel" to="Game" method="_on_game_panel_gui_input"]
