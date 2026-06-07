@@ -4,9 +4,23 @@ class_name PersistenceManager
 const SAVE_PATH = "user://save.json"
 
 func _ready():
-	var has_data := FileAccess.file_exists(SAVE_PATH) and FileAccess.open(SAVE_PATH, FileAccess.READ).get_length() > 0
-	print("has data: %s" % has_data)
-	GameState.persisted_data_changed.emit(has_data)
+	var file := FileAccess.open(SAVE_PATH, FileAccess.READ)
+	if file == null:
+		GameState.persisted_data_changed.emit(false)
+		return
+	
+	var json := JSON.new()
+	var error = json.parse(file.get_line())
+	if error != OK:
+		GameState.persisted_data_changed.emit(false)
+		return
+	
+	var save_dict = json.get_data()
+	if save_dict is Dictionary and save_dict.has("game"):
+		var has_data = true
+		GameState.persisted_data_changed.emit(has_data)
+	else:
+		GameState.persisted_data_changed.emit(false)
 
 func save_game_v0_1() -> void:
 	var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
@@ -14,7 +28,6 @@ func save_game_v0_1() -> void:
 	var frog_position = GameState.frog_position
 	var score = GameState.score
 	var bgm_enabled = Settings.bgm_enabled
-	print("save bgm %s" % bgm_enabled)
 	var save_dict = {
 		version = "0.1",
 		game = {
@@ -28,8 +41,6 @@ func save_game_v0_1() -> void:
 	
 	file.store_line(JSON.stringify(save_dict))
 	GameState.persisted_data_changed.emit(true)
-
-	#get_node(^"../LoadJSON").disabled = false
 
 func load_game_v0_1():
 	var file := FileAccess.open(SAVE_PATH, FileAccess.READ)
@@ -47,5 +58,5 @@ func load_game_v0_1():
 	
 func clear_data() -> void:
 	var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
-	file.store_line("")
+	file.store_line("{}")
 	GameState.persisted_data_changed.emit(false)
