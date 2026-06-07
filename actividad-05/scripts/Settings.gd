@@ -13,3 +13,11 @@ func toggle_sfx() -> void:
 func toggle_bgm() -> void:
 	bgm_enabled = not bgm_enabled
 	bgm_enabled_changed.emit(bgm_enabled)
+
+func set_bgm_enabled(enabled: bool) -> void:
+	bgm_enabled = enabled
+	bgm_enabled_changed.emit(bgm_enabled)
+	
+func set_sfx_enabled(enabled: bool) -> void:
+	sfx_enabled = enabled
+	sfx_enabled_changed.emit(sfx_enabled)

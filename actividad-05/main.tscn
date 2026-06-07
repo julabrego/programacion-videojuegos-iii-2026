@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://dcposuytmlaxh" path="res://Frog.mp3" id="2_h2yge"]
 [ext_resource type="AudioStream" uid="uid://cbd4m8fyiykg7" path="res://the_comeback2.ogg" id="3_1bvp3"]
 [ext_resource type="Script" uid="uid://bh56xgj2h1rmt" path="res://scripts/AudioController.gd" id="5_272bh"]
+[ext_resource type="Script" uid="uid://c6j80ro7oiss" path="res://scripts/PersistenceManager.gd" id="7_272bh"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0xm2m"]
 outline_size = 12
@@ -187,6 +188,12 @@ stream = ExtResource("3_1bvp3")
 volume_db = -15.0
 autoplay = true
 
+[node name="PersistenceManager" type="Node2D" parent="." unique_id=1578278070]
+script = ExtResource("7_272bh")
+
+[connection signal="pressed" from="UIManager/SavePanel/VBoxContainer/HBoxContainer/VBoxContainer/Save01" to="PersistenceManager" method="save_game_v0_1"]
+[connection signal="pressed" from="UIManager/SavePanel/VBoxContainer/HBoxContainer/VBoxContainer/Load01" to="PersistenceManager" method="load_game_v0_1"]
+[connection signal="pressed" from="UIManager/SavePanel/VBoxContainer/Clear" to="PersistenceManager" method="clear_data"]
 [connection signal="gui_input" from="UIManager/GamePanel" to="Game/FrogIdle" method="_on_game_panel_gui_input"]
-[connection signal="toggled" from="UIManager/GamePanel/HBoxContainer/SFXButton" to="AudioController" method="_on_sfx_enabled_changed"]
-[connection signal="toggled" from="UIManager/GamePanel/HBoxContainer/BGMButton" to="AudioController" method="_on_bgm_enabled_changed"]
+[connection signal="toggled" from="UIManager/GamePanel/HBoxContainer/SFXButton" to="UIManager" method="_on_sfx_button_toggled"]
+[connection signal="toggled" from="UIManager/GamePanel/HBoxContainer/BGMButton" to="UIManager" method="_on_bgm_button_toggled"]
