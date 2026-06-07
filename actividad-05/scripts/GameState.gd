@@ -3,6 +3,7 @@ extends Node
 signal score_changed(score: int)
 signal frog_position_changed(frog_position: Vector2)
 signal persisted_data_changed(is_data_available: bool, data: String)
+signal error_message_triggered(error_message: String)
 
 var score: int = 0
 var frog_position: Vector2 = Vector2.ZERO

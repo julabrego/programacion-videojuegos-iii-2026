@@ -12,6 +12,43 @@
 outline_size = 12
 outline_color = Color(0, 0, 0, 1)
 
+[sub_resource type="Animation" id="Animation_272bh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_5vw27"]
+resource_name = "show_message_and_fade"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kek77"]
+_data = {
+&"RESET": SubResource("Animation_272bh"),
+&"show_message_and_fade": SubResource("Animation_5vw27")
+}
+
 [node name="Control" type="Control" unique_id=745245173]
 layout_mode = 3
 anchors_preset = 15
@@ -108,6 +145,16 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 text = "CLEAR DATA"
+
+[node name="ErrorText" type="Label" parent="UIManager/SavePanel/VBoxContainer" unique_id=44988615]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+text = "Error message"
+
+[node name="ErrorTextAnimation" type="AnimationPlayer" parent="UIManager/SavePanel/VBoxContainer/ErrorText" unique_id=1103699530]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_kek77")
 
 [node name="VSeparator" type="VSeparator" parent="UIManager" unique_id=1037085527]
 layout_mode = 2

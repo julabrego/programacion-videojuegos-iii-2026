@@ -8,9 +8,12 @@ func _ready() -> void:
 	Settings.bgm_enabled_changed.connect(update_bgm_enabled_switch)
 	Settings.sfx_enabled_changed.connect(update_sfx_enabled_switch)
 	GameState.persisted_data_changed.connect(update_load_persisted_data_status)
+	GameState.error_message_triggered.connect(show_error_message)
 	
 	%SFXButton.button_pressed = Settings.sfx_enabled
 	%BGMButton.button_pressed = Settings.bgm_enabled
+	
+	%ErrorText.visible = false
 
 func update_score_text(score: int):
 	%Score.set_text("SCORE: %s" % score)
@@ -28,6 +31,12 @@ func update_bgm_enabled_switch(enabled: bool) -> void:
 
 func update_sfx_enabled_switch(enabled: bool) -> void:
 	%SFXButton.button_pressed = enabled
+	
+func show_error_message(message: String) -> void:
+	%ErrorText.text = message
+	%ErrorText.visible = true
+	%ErrorTextAnimation.play("show_message_and_fade")
+	
 
 func _on_bgm_button_toggled(toggled_on: bool) -> void:
 	Settings.set_bgm_enabled(toggled_on)

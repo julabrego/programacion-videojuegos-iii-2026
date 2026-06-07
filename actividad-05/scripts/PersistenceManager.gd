@@ -50,7 +50,7 @@ func load_game_v0_1():
 	
 	var version = str_to_var(save_dict.version)
 	if version > 0.1:
-		print("version error")
+		GameState.error_message_triggered.emit("Versión no compatible")
 		return
 
 	var frog_position = str_to_var(save_dict.game.frog_position)
@@ -94,8 +94,6 @@ func load_game_v0_3():
 	var score = str_to_var(save_dict.game.score)
 	var bgm_enabled = save_dict.configuration.bgm_enabled
 	var sfx_enabled = save_dict.configuration.sfx_enabled if save_dict.configuration.has("sfx_enabled") else Settings.sfx_enabled
-	
-	print("sfx_enabled %s" % sfx_enabled)
 	
 	GameState.set_frog_position(frog_position)
 	GameState.set_score(score)
