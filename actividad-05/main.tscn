@@ -157,12 +157,12 @@ layout_mode = 2
 text = "BGM"
 
 [node name="Game" type="Node2D" parent="." unique_id=1605636483]
-script = ExtResource("2_1bvp3")
 
 [node name="FrogIdle" type="Sprite2D" parent="Game" unique_id=1129009673]
 unique_name_in_owner = true
 position = Vector2(877, 257)
 texture = ExtResource("1_ig7tw")
+script = ExtResource("2_1bvp3")
 
 [node name="Position" type="Label" parent="Game/FrogIdle" unique_id=1002854419]
 unique_name_in_owner = true
@@ -187,6 +187,6 @@ stream = ExtResource("3_1bvp3")
 volume_db = -15.0
 autoplay = true
 
-[connection signal="gui_input" from="UIManager/GamePanel" to="Game" method="_on_game_panel_gui_input"]
+[connection signal="gui_input" from="UIManager/GamePanel" to="Game/FrogIdle" method="_on_game_panel_gui_input"]
 [connection signal="toggled" from="UIManager/GamePanel/HBoxContainer/SFXButton" to="AudioController" method="_on_sfx_enabled_changed"]
 [connection signal="toggled" from="UIManager/GamePanel/HBoxContainer/BGMButton" to="AudioController" method="_on_bgm_enabled_changed"]
