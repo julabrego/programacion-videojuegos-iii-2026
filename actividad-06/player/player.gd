@@ -3,14 +3,19 @@
 extends Node2D
 class_name Player
 
+const MIN_CANNON_ANGLE = -45
+const MAX_CANNON_ANGLE = 0
+const MIN_SHOT_SPEED = 100
+const MAX_SHOT_SPEED = 350
+
 @export var bullet_scene:PackedScene
 
-@export var shot_angle: float = -45:
+@export_range(MIN_CANNON_ANGLE, MAX_CANNON_ANGLE) var shot_angle: int = MIN_CANNON_ANGLE:
 	set(value):
 		shot_angle = value
 		shot_velocity = degrees_to_vector2(shot_angle, shot_speed)
 
-@export_range(0, 400) var shot_speed: int = 350:
+@export_range(MIN_SHOT_SPEED, MAX_SHOT_SPEED) var shot_speed: int = MAX_SHOT_SPEED:
 	set(value):
 		shot_speed = value
 		shot_velocity = degrees_to_vector2(shot_angle, shot_speed)
@@ -32,32 +37,40 @@ var shot_velocity:Vector2:
 
 func _ready() -> void:
 	shot_velocity = degrees_to_vector2(shot_angle, shot_speed)
+	%CannonPivot.rotation = deg_to_rad(shot_angle)
 	
 func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
-	if Input.is_action_just_pressed(&"ui_accept"):
-		var bullet:Bullet = bullet_scene.instantiate()
-		bullet.shot_gravity = shot_gravity
-		bullet.shot_velocity = shot_velocity
-		bullet.position = %CannonPivot.global_position
+	if Input.is_action_pressed(&'ui_up'):
+		shot_angle -= 1
+		%CannonPivot.rotation = deg_to_rad(shot_angle)
+	elif Input.is_action_pressed(&'ui_down'):
+		shot_angle += 1
+		%CannonPivot.rotation = deg_to_rad(shot_angle)
+	shot_angle = clamp(shot_angle, MIN_CANNON_ANGLE, MAX_CANNON_ANGLE)
 		
-		var container_node = self
+	if Input.is_action_just_pressed(&"ui_accept"):
 		if has_node("%BulletContainer"):
-			container_node = %BulletContainer
-		container_node.add_child(bullet)
+			var bullets_in_scene = %BulletContainer.get_child_count()
+			if bullets_in_scene < max_shots:
+				var bullet:Bullet = bullet_scene.instantiate()
+				bullet.shot_gravity = shot_gravity
+				bullet.shot_velocity = shot_velocity
+				bullet.position = %CannonPivot.global_position
+				
+				var container_node = self
+				container_node = %BulletContainer
+				container_node.add_child(bullet)
 		
 func _draw() -> void:
-	#if not Engine.is_editor_hint():
-		#return
+	if not Engine.is_editor_hint():
+		return
 	draw_string(ThemeDB.get_default_theme().default_font,Vector2(-40,20),
 				str("max shots: ",max_shots),HORIZONTAL_ALIGNMENT_LEFT)
-	
-	var zero_degrees := 0
-	var fourtyfive_degrees := -45
-	
-	draw_bullet_path(degrees_to_vector2(zero_degrees, shot_speed), Color.CYAN)
-	draw_bullet_path(degrees_to_vector2(fourtyfive_degrees, shot_speed), Color.YELLOW)
+
+	draw_bullet_path(degrees_to_vector2(MIN_CANNON_ANGLE, shot_speed), Color.CYAN)
+	draw_bullet_path(degrees_to_vector2(MAX_CANNON_ANGLE, shot_speed), Color.YELLOW)
 	
 func draw_bullet_path(velocity: Vector2, color: Color) -> void:
 	var cannon_position = %CannonPivot.position
@@ -65,7 +78,6 @@ func draw_bullet_path(velocity: Vector2, color: Color) -> void:
 	var points := PackedVector2Array([start_pos])
 	var pos = start_pos
 	var dt := 0.05
-	
 	var vel := velocity
 	
 	for i in 120:
