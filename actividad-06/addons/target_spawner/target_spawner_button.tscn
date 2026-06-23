@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://qfi3ktriee7o"]
+
+[ext_resource type="Script" uid="uid://drmoobabwi6g4" path="res://addons/target_spawner/target_spawner_button.gd" id="1_2nori"]
+
+[node name="Control" type="Control" unique_id=797553194]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button" type="Button" parent="." unique_id=1103355426]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Spawn target"
+script = ExtResource("1_2nori")

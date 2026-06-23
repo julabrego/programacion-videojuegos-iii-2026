@@ -1,16 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://djs0p0xd6t3tg"]
+[gd_scene format=3 uid="uid://djs0p0xd6t3tg"]
 
 [ext_resource type="Texture2D" uid="uid://cirb2cxp2jq6c" path="res://targets/target_01.tres" id="1_i0ktl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vasa2"]
 size = Vector2(50, 50)
 
-[node name="Target" type="Area2D"]
+[node name="Target" type="Area2D" unique_id=212261557]
 metadata/_edit_group_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1340469031]
 texture = ExtResource("1_i0ktl")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=965261127]
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_vasa2")
