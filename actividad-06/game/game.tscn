@@ -26,3 +26,91 @@ unique_name_in_owner = true
 
 [node name="Target" parent="." unique_id=1458480239 instance=ExtResource("2_vasa2")]
 position = Vector2(849, 407)
+
+[node name="Target2" type="Area2D" parent="." unique_id=212261557 instance=ExtResource("2_vasa2")]
+position = Vector2(745, 409)
+metadata/_edit_group_ = true
+
+[node name="Target3" type="Area2D" parent="." unique_id=1687768767 instance=ExtResource("2_vasa2")]
+position = Vector2(724, 375)
+metadata/_edit_group_ = true
+
+[node name="Target4" type="Area2D" parent="." unique_id=484636128 instance=ExtResource("2_vasa2")]
+position = Vector2(822, 116)
+metadata/_edit_group_ = true
+
+[node name="Target5" type="Area2D" parent="." unique_id=1095375463 instance=ExtResource("2_vasa2")]
+position = Vector2(944, 345)
+metadata/_edit_group_ = true
+
+[node name="Target6" type="Area2D" parent="." unique_id=96083104 instance=ExtResource("2_vasa2")]
+position = Vector2(1023, 437)
+metadata/_edit_group_ = true
+
+[node name="Target7" type="Area2D" parent="." unique_id=593163753 instance=ExtResource("2_vasa2")]
+position = Vector2(1101, 135)
+metadata/_edit_group_ = true
+
+[node name="Target8" type="Area2D" parent="." unique_id=1487793723 instance=ExtResource("2_vasa2")]
+position = Vector2(812, 185)
+metadata/_edit_group_ = true
+
+[node name="Target9" type="Area2D" parent="." unique_id=529887840 instance=ExtResource("2_vasa2")]
+position = Vector2(735, 540)
+metadata/_edit_group_ = true
+
+[node name="Target10" type="Area2D" parent="." unique_id=654583996 instance=ExtResource("2_vasa2")]
+position = Vector2(794, 190)
+metadata/_edit_group_ = true
+
+[node name="Target11" type="Area2D" parent="." unique_id=1122986968 instance=ExtResource("2_vasa2")]
+position = Vector2(982, 147)
+metadata/_edit_group_ = true
+
+[node name="Target12" type="Area2D" parent="." unique_id=2101466913 instance=ExtResource("2_vasa2")]
+position = Vector2(736, 59)
+metadata/_edit_group_ = true
+
+[node name="Target13" type="Area2D" parent="." unique_id=389598592 instance=ExtResource("2_vasa2")]
+position = Vector2(830, 339)
+metadata/_edit_group_ = true
+
+[node name="Target14" type="Area2D" parent="." unique_id=2074633198 instance=ExtResource("2_vasa2")]
+position = Vector2(624, 71)
+metadata/_edit_group_ = true
+
+[node name="Target15" type="Area2D" parent="." unique_id=392374599 instance=ExtResource("2_vasa2")]
+position = Vector2(783, 351)
+metadata/_edit_group_ = true
+
+[node name="Target16" type="Area2D" parent="." unique_id=149684425 instance=ExtResource("2_vasa2")]
+position = Vector2(744, 220)
+metadata/_edit_group_ = true
+
+[node name="Target17" type="Area2D" parent="." unique_id=1962934778 instance=ExtResource("2_vasa2")]
+position = Vector2(644, 492)
+metadata/_edit_group_ = true
+
+[node name="Target18" type="Area2D" parent="." unique_id=3850137 instance=ExtResource("2_vasa2")]
+position = Vector2(1079, 143)
+metadata/_edit_group_ = true
+
+[node name="Target19" type="Area2D" parent="." unique_id=940895142 instance=ExtResource("2_vasa2")]
+position = Vector2(764, 307)
+metadata/_edit_group_ = true
+
+[node name="Target20" type="Area2D" parent="." unique_id=402750303 instance=ExtResource("2_vasa2")]
+position = Vector2(873, 281)
+metadata/_edit_group_ = true
+
+[node name="Target21" type="Area2D" parent="." unique_id=570252949 instance=ExtResource("2_vasa2")]
+position = Vector2(594, 264)
+metadata/_edit_group_ = true
+
+[node name="Target22" type="Area2D" parent="." unique_id=1134924208 instance=ExtResource("2_vasa2")]
+position = Vector2(883, 167)
+metadata/_edit_group_ = true
+
+[node name="Target23" type="Area2D" parent="." unique_id=1665731859 instance=ExtResource("2_vasa2")]
+position = Vector2(794, 495)
+metadata/_edit_group_ = true

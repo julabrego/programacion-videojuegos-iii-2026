@@ -1,7 +1,6 @@
 @tool
 extends EditorPlugin
 
-# A class member to hold the dock during the plugin life cycle.
 var dock
 
 func _enter_tree():
@@ -13,7 +12,7 @@ func _enter_tree():
 
 	dock.title = "Scene editor actions"
 
-	dock.default_slot = DOCK_SLOT_LEFT_UL
+	dock.default_slot = DOCK_SLOT_RIGHT_UR
 
 	dock.available_layouts = EditorDock.DOCK_LAYOUT_VERTICAL | EditorDock.DOCK_LAYOUT_FLOATING
 
@@ -21,10 +20,7 @@ func _enter_tree():
 
 
 func _exit_tree():
-	# Clean-up of the plugin goes here.
-	# Remove the dock.
 	remove_dock(dock)
-	# Erase the control from the memory.
 	dock.queue_free()
 
 const SPAWN_AREA = {
